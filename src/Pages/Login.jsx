@@ -73,7 +73,7 @@ const Login = ({setisAuth, setuser}) => {
                   type="email" 
                   placeholder='Enter Email Address' 
                   name='email'
-                  alue={email}
+                  value={email}
                   onChange={onInputChange}
                   
                 />

@@ -2,25 +2,38 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate} from 'react-router-dom';
 import { AiOutlineClose } from "react-icons/ai";
 import { BsBlockquoteRight } from 'react-icons/bs';
+import { auth } from "../firebase-configue";
+import { signOut } from "firebase/auth";
 
 let Links =[
   {name:"Dashbaord", link:"/dashboard"},
-  {name:"Birth", link:"/birth_registration"},
-  {name:"antenetal", link:"/antenetal_registration"},
+  {name:"Birth", link:"/birth"},
+  {name:"antenetal", link:"/antenetal"},
   {name:"search", link:"/search"},
   {name:"about", link:"/about"},
 ];
-const Navbar = ({isAuth}) => {
+const Navbar = ({isAuth, setisAuth, setuser}) => {
 
 
     const navigate = useNavigate();
-
   
    //toggling 
       const [open,setOpen]=useState(false);
       const handleClose = ()=>{
         setOpen(!open)
       }
+
+
+      const logOut = () =>{
+    if (window.confirm('ARE YOU SURE YOU WANT TO LOG OUT FROM YOUR ACCOUNT ?')){
+      signOut(auth).then(()=>{
+      localStorage.clear();
+      setuser(null);
+      setisAuth(false);
+      navigate('/login');
+    })
+    }
+  };
 
   return (
    <div className='shadow-md w-full fixed z-10 top-0 left-0 font-mono'>
@@ -47,7 +60,7 @@ const Navbar = ({isAuth}) => {
      
   {!isAuth ? (  <Link to='/login'><button className='bg-[#0F172A] text-white font-[Poppins] py-1 px-6 rounded md:ml-8 hover:bg-[#1F2937]
     duration-500'> Login </button> </Link> ) : (
-      <button className='bg-[#0F172A] text-white font-[Poppins] py-1 px-6 rounded md:ml-8 hover:bg-[#1F2937]
+      <button onClick={logOut} className='bg-[#0F172A] text-white font-[Poppins] py-1 px-6 rounded md:ml-8 hover:bg-[#1F2937]
       duration-500'> SignOut </button>
     )}
     

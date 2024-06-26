@@ -3,8 +3,13 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from 'react-toastify';
 import {auth, provider } from '../firebase-configue';
 import {signInWithPopup} from 'firebase/auth';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+
 
 const GoogleAuth = ({setisAuth}) => {
+
+  const navigate = useNavigate()
 
 
          //Google signUp func..

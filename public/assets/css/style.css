@@ -466,7 +466,7 @@ h6 {
 #hero {
     width: 100%;
     height: 90vh;
-    background: url("../img/gallery/gallery-1.jpg") top center;
+    background: url("../img/gallery/pexels-shvetsa-3844581.jpg") top center;
     background-size: cover;
     margin-bottom: -200px;
 }
@@ -788,7 +788,7 @@ section {
 }
 
 .about .video-box {
-    background: url("../img/departments-3.jpg") center center no-repeat;
+    background: url("../img/gallery/gallery-6.jpg") center center no-repeat;
     background-size: cover;
     min-height: 500px;
 }
