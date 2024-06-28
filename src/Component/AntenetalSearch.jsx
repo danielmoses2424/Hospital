@@ -1,7 +1,49 @@
-import React from 'react'
+import {useState, useEffect} from 'react';
+import { db } from '../firebase-configue';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 import '../Style/SearchTesting.css';
 
 const AntenetalSearch = () => {
+
+  //created a usestate for my filter function
+         const [filterdata, setfilterdata]= useState([]);
+
+         //making it an empty string,so that whenever click it will erase every targeted value
+         const [wordEntered, setwordEntered] = useState('');
+
+          useEffect(()=> {
+          const getmedicalform = onSnapshot(
+           collection(db, 'AntenetalData'),
+           (snapshot)=>{
+             let list = []
+             snapshot.docs.forEach((doc)=>{
+               list.push({id: doc.id, ...doc.data()});
+             });
+             setfilterdata(list);
+             
+           }
+          )
+          return ()=>{
+           getmedicalform()
+          }
+       },[]);
+
+       const handleSubmit = (e)=>{
+        e.preventDefault();
+        const searchword = e.target.value
+        
+        setwordEntered(searchword)
+        setfilterdata(filterdata.filter((data)=>
+        data.Full_name.toLowerCase().includes(wordEntered.toLowerCase())))
+  
+        if(searchword === ''){
+          setfilterdata([])
+        }else {
+          setfilterdata(filterdata.filter((data)=>
+          data.Full_name.toLowerCase().includes(wordEntered.toLowerCase())))
+        }
+    };
   return (
      <div> 
     <div className="relative">
@@ -14,13 +56,24 @@ const AntenetalSearch = () => {
               </svg>
         </div>
 
-        <input type="search"
+        <input type="search" value={wordEntered} onChange={handleSubmit}
         className="block w-full p-4 pr-9 text-sm text-gray-900 border border-gray-300 
         rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700
          dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500
           dark:focus:border-blue-500 " placeholder="Search antenetal registration..." />
     
     </div>
+
+    {filterdata.length !== 0 ? (
+<div className="dataresult">
+{filterdata.slice(0, 1).map((e, index)=>{
+    return <Link to={`/antenetal_detail/${e.id}`} key={index}>
+        <p className='text-blue-300 dataiteam'> {e.Full_name} </p>
+        </Link>
+})}
+</div>
+
+) : (<h2 className='text-white'>No data found </h2>)} 
 
 </div>
   )

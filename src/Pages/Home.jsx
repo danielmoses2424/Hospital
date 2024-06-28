@@ -9,7 +9,7 @@ const Home = () => {
     <div className='sm:mt-4 '>
     <section id="hero" className="d-flex align-items-center  " > 
     <div className="container sm:pr-[20vh]">
-      <h1 className='text-black'> Welcome to central <br/> hospital, Benin city </h1>
+      <h1 className='text-black'> Welcome to central <br/> hospital, Port-Harcourt </h1>
       <h2 className='text-black'> Birth registration is the first step towards recognizing a child's inalienable <br/> right as a human being </h2>
       <Link to='/birth' className="btn-get-started scrollto"> Get Started </Link>
     </div>

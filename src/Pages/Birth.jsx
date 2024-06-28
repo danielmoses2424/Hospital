@@ -349,6 +349,7 @@ useEffect(()=>{
               <label> Gender </label>
               <div className=' w-[70%] relative '>
               <select value={Gender} onChange={onCategoryChange_two} >
+                <option> select an option</option>
                   {categoryOption.map((option, index) => (
                     <option value={option || ""} key={index}> {option} </option>
                   ))}
