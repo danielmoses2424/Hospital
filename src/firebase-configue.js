@@ -5,7 +5,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth"
 
 // your web app firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBqNjfbiQ54ih9lViDZxf6BQ9eNZWpvhVk",
+  apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "hospital-3d28c.firebaseapp.com",
   projectId: "hospital-3d28c",
   storageBucket: "hospital-3d28c.appspot.com",
